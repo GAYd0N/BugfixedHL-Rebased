@@ -26,10 +26,11 @@ CCfefxPanel::CCfefxPanel() : BaseClass(nullptr, VIEWPORT_CFEFXPANEL_NAME)
 
 	m_pKillMarkPanel = new vgui2::ImagePanel(this, "KillMark");
 
-	ShowPanel(true);
-	m_pKillMarkPanel->SetVisible(true);
-
 	LoadControlSettings(VGUI2_ROOT_DIR "resource/CfefxPanel.res");
+
+	ShowPanel(false);
+	m_pKillMarkPanel->SetVisible(false);
+
 	//vgui2::GetAnimationController()->SetScriptFile(GetVPanel(), VGUI2_ROOT_DIR "scripts/hudanimations.txt");
 }
 
@@ -40,21 +41,21 @@ void CCfefxPanel::ApplySchemeSettings(vgui2::IScheme *pScheme)
 }
 
 //true淡入显示，false淡出隐藏
-void CCfefxPanel::StartFade(vgui2::ImagePanel *panel, bool state, float fadetime, float delaytime)
-{
-	if (!panel->IsVisible())
-		panel->SetVisible(true);
-	panel->SetAlpha(state ? 0 : 255);
-	vgui2::GetAnimationController()->RunAnimationCommand(panel, "alpha", state ? 255.0f : 0.0f, delaytime, fadetime, vgui2::AnimationController::INTERPOLATOR_LINEAR);
-}
+//void CCfefxPanel::StartFade(vgui2::ImagePanel *panel, bool state, float fadetime, float delaytime)
+//{
+//	if (!panel->IsVisible())
+//		panel->SetVisible(true);
+//	panel->SetAlpha(state ? 0 : 255);
+//	vgui2::GetAnimationController()->RunAnimationCommand(panel, "alpha", state ? 255.0f : 0.0f, delaytime, fadetime, vgui2::AnimationController::INTERPOLATOR_LINEAR);
+//}
 
-
-void CCfefxPanel::ShowKillMark() 
+void CCfefxPanel::ShowKillMark(bool state) 
 {
-	if (gEngfuncs.GetClientTime() - m_flTime > cl_cfefx_time.GetFloat() && iKill != 0)
+	ShowPanel(true);
+	if (gEngfuncs.GetClientTime() - m_flTime > cl_cfefx_time.GetFloat() && iKill != 0 || !state)
 	{
 		iKill = 0;
-		m_pKillMarkPanel->SetAlpha(0);
+		m_pKillMarkPanel->SetVisible(false);
 		return;
 	}
 	else
@@ -62,18 +63,41 @@ void CCfefxPanel::ShowKillMark()
 		m_flTime = gEngfuncs.GetClientTime();
 		iKill++;
 	}
-	iKill = std::clamp<int>(iKill, 0, 6);
+	iKill = std::clamp<int>(iKill, 1, 6);
 	m_pKillMarkPanel->SetImage(m_szKillMark[iKill - 1]);
-	StartFade(m_pKillMarkPanel, false, 0.5, 1);
+	m_pKillMarkPanel->SetVisible(true);
+	//m_pKillMarkPanel->SetAlpha(255);
 	//PlaySound(连杀音效[击杀数], cl_cfefx_volume.GetFloat());
 }
-void CCfefxPanel::Think()
+void CCfefxPanel::OnThink()
 {
+	//auto local = gEngfuncs.GetLocalPlayer();
+	//if (local)
+	//{
+	//	if (local->curstate.health <= 0)
+	//	{
+	//		m_pKillMarkPanel->SetVisible(false);
+	//		m_pKillMarkPanel->SetAlpha(255);
+	//		iKill = 0;
+	//		return;
+	//	}
+	//}
+	if (gEngfuncs.GetClientTime() - m_flTime > 1)
+	{
+		//int a = m_pKillMarkPanel->GetAlpha();
+		//a -= 2;
+		//if (a <= 0)
+		//	m_pKillMarkPanel->SetVisible(false);
+		//else
+		//	m_pKillMarkPanel->SetAlpha(a);
+		m_pKillMarkPanel->SetVisible(false);
+	}
 }
 void CCfefxPanel::Reset()
 {
-	ShowPanel(true);
+	ShowPanel(false);
 	m_flTime = 0;
+	iKill = 0;
 }
 void CCfefxPanel::ShowPanel(bool state)
 {

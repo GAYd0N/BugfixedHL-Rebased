@@ -658,7 +658,7 @@ void CClientViewport::DeathMsg(int killer, int victim)
 	m_pScorePanel->DeathMsg(killer, victim);
 }
 
-void CClientViewport::ShowKillMark()
+void CClientViewport::ShowKillMark(bool state)
 {
-	m_pCfefxPanel->ShowKillMark();
+	m_pCfefxPanel->ShowKillMark(state);
 }

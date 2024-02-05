@@ -101,7 +101,7 @@ public:
 	void InputPlayerSpecial(void);
 	bool AllowedToPrintText(void);
 	void DeathMsg(int killer, int victim);
-	void ShowKillMark();
+	void ShowKillMark(bool state);
 
 private:
 	static constexpr float COMMAND_MENU_TAP_DELAY = 0.3f;
