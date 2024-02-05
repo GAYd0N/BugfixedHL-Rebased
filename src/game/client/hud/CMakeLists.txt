@@ -10,6 +10,8 @@ add_sources(
 	base.cpp
 	battery.cpp
 	battery.h
+	cfefx.cpp
+	cfefx.h
 	chat.cpp
 	chat.h
 	crosshair.cpp

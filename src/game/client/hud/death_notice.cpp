@@ -271,6 +271,7 @@ int CHudDeathNotice::MsgFunc_DeathMsg(const char *pszName, int iSize, void *pbuf
 	if (killerInfo && killerInfo->IsThisPlayer() && !rgDeathNoticeList[i].iNonPlayerKill && !rgDeathNoticeList[i].iSuicide && cl_killsound.GetFloat() > 0)
 	{
 		PlaySound(cl_killsound_path.GetString(), cl_killsound.GetFloat());
+		g_pViewport->ShowKillMark();
 	}
 
 	// Set color of own kills/deaths to yellow

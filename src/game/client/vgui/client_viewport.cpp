@@ -14,6 +14,7 @@
 #include "hud/text_message.h"
 #include "hud/spectator.h"
 #include "cl_util.h"
+#include "hud/cfefx.h"
 
 #include "score_panel.h"
 #include "client_motd.h"
@@ -142,6 +143,7 @@ void CClientViewport::CreateDefaultPanels()
 	AddNewPanel(m_pSpectatorPanel = new CSpectatorPanel());
 	AddNewPanel(m_pTeamMenu = new CTeamMenu());
 	AddNewPanel(m_pCommandMenu = new CCommandMenu());
+	AddNewPanel(m_pCfefxPanel = new CCfefxPanel());
 }
 
 void CClientViewport::AddNewPanel(IViewportPanel *panel)
@@ -654,4 +656,9 @@ bool CClientViewport::AllowedToPrintText(void)
 void CClientViewport::DeathMsg(int killer, int victim)
 {
 	m_pScorePanel->DeathMsg(killer, victim);
+}
+
+void CClientViewport::ShowKillMark()
+{
+	m_pCfefxPanel->ShowKillMark();
 }

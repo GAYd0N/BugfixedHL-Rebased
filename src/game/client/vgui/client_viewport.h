@@ -41,6 +41,7 @@ class CClientMOTD;
 class CSpectatorPanel;
 class CTeamMenu;
 class CCommandMenu;
+class CCfefxPanel;
 
 class CClientViewport : public vgui2::EditablePanel
 {
@@ -100,6 +101,7 @@ public:
 	void InputPlayerSpecial(void);
 	bool AllowedToPrintText(void);
 	void DeathMsg(int killer, int victim);
+	void ShowKillMark();
 
 private:
 	static constexpr float COMMAND_MENU_TAP_DELAY = 0.3f;
@@ -112,6 +114,7 @@ private:
 	CSpectatorPanel *m_pSpectatorPanel = nullptr;
 	CTeamMenu *m_pTeamMenu = nullptr;
 	CCommandMenu *m_pCommandMenu = nullptr;
+	CCfefxPanel *m_pCfefxPanel = nullptr;
 
 	int m_iNumberOfTeams = 0;
 	int m_iAllowSpectators = 0;
