@@ -63,11 +63,13 @@ void CCfefxPanel::ShowKillMark(bool state)
 		m_flTime = gEngfuncs.GetClientTime();
 		iKill++;
 	}
+	//iKill = std::clamp<int>(iKill, 1, 8);
+	//if (iKill != 1)
+	//	PlaySound(m_szKillSound[0], (int)cl_cfefx_volume.GetFloat());
+	//PlaySound(m_szKillSound[iKill - 1], (int)cl_cfefx_volume.GetFloat());
 	iKill = std::clamp<int>(iKill, 1, 6);
 	m_pKillMarkPanel->SetImage(m_szKillMark[iKill - 1]);
 	m_pKillMarkPanel->SetVisible(true);
-	//m_pKillMarkPanel->SetAlpha(255);
-	//PlaySound(Á¬É±ÒôÐ§[»÷É±Êý], cl_cfefx_volume.GetFloat());
 }
 void CCfefxPanel::OnThink()
 {

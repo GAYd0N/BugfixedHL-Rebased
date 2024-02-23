@@ -34,5 +34,14 @@ private:
 	 "ui/gfx/cfefx/badge_multi5",
 	 "ui/gfx/cfefx/badge_multi6"
 	 };
-	//std::vector<const char *> ¡¨…±“Ù–ß = { "sound/misc/UI_SPECIALKILL2.wav", "123456" };
+	std::array<const char*, 8> m_szKillSound = {
+		"cfefx/UI_SPECIALKILL2.wav", 
+		"cfefx/double.wav", 
+		"cfefx/tri.wav", 
+		"cfefx/four.wav", 
+		"cfefx/five.wav", 
+		"cfefx/six.wav", 
+		"cfefx/seven.wav", 
+		"cfefx/eight.wav"
+	};
 };
